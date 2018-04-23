@@ -1,0 +1,67 @@
+﻿<Window x:Class="GridApplication.Window1" 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" 
+        xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" 
+        xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" 
+        xmlns:local="clr-namespace:GridApplication" 
+        Title="Window1" Height="600" Width="1000">
+    <dxb:BarManager CreateStandardLayout="True">
+        <dxb:BarManager.Items>
+            <dxb:BarButtonItem x:Name="undoItem" Command="Undo" Content="Undo" />
+            <dxb:BarButtonItem x:Name="redoItem" Command="Redo" Content="Redo" />
+            <dxb:BarButtonItem x:Name="boldItem" Command="ToggleBold" Content="Bold" />
+            <dxb:BarButtonItem x:Name="italicItem" Command="ToggleItalic" Content="Italic" />
+            <dxb:BarButtonItem x:Name="underlineItem" Command="ToggleUnderline" Content="Underline" />
+        </dxb:BarManager.Items>
+        <dxb:BarManager.Bars>
+            <dxb:Bar UseWholeRow="True">
+                <dxb:Bar.DockInfo>
+                    <dxb:BarDockInfo ContainerType="Top" />
+                </dxb:Bar.DockInfo>
+                <dxb:Bar.ItemLinks>
+                    <dxb:BarButtonItemLink BarItemName="undoItem" />
+                    <dxb:BarButtonItemLink BarItemName="redoItem" />
+                    <dxb:BarButtonItemLink BarItemName="boldItem" />
+                    <dxb:BarButtonItemLink BarItemName="italicItem" />
+                    <dxb:BarButtonItemLink BarItemName="underlineItem" />
+                </dxb:Bar.ItemLinks>
+            </dxb:Bar>
+        </dxb:BarManager.Bars>
+        <dxg:GridControl Name="grid">
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn FieldName="ID" />
+                <dxg:GridColumn FieldName="Trademark" />
+                <dxg:GridColumn FieldName="Model" />
+                <dxg:GridColumn Header="Description" FieldName="RtfContent">
+                    <dxg:GridColumn.CellTemplate>
+                        <DataTemplate>
+                            <local:RichTextEdit x:Name="PART_Editor" Height="350" />
+                        </DataTemplate>
+                    </dxg:GridColumn.CellTemplate>
+                    <dxg:GridColumn.DisplayTemplate>
+                        <ControlTemplate>
+                            <local:RichTextBoxEx BorderThickness="0" RtfText="{Binding DisplayText, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                                                 HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" />
+                        </ControlTemplate>
+                    </dxg:GridColumn.DisplayTemplate>
+                    <dxg:GridColumn.EditTemplate>
+                        <ControlTemplate>
+                            <local:RichTextBoxEx BorderThickness="0" x:Name="PART_Editor" 
+                                                 RtfText="{Binding EditValue, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                                                 HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Visible" />
+                        </ControlTemplate>
+                    </dxg:GridColumn.EditTemplate>
+                    <dxg:GridColumn.GroupValueTemplate>
+                        <DataTemplate>
+                            <local:RichTextBoxEx BorderThickness="0" RtfText="{Binding Value, Mode=OneWay}" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" />
+                        </DataTemplate>
+                    </dxg:GridColumn.GroupValueTemplate>
+                </dxg:GridColumn>
+            </dxg:GridControl.Columns>
+            <dxg:GridControl.View>
+                <dxg:TableView Name="view" />
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+    </dxb:BarManager>
+</Window>
