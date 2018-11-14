@@ -33,34 +33,23 @@
                 <dxg:GridColumn FieldName="ID" />
                 <dxg:GridColumn FieldName="Trademark" />
                 <dxg:GridColumn FieldName="Model" />
-                <dxg:GridColumn Header="Description" FieldName="RtfContent">
-                    <dxg:GridColumn.CellTemplate>
+                <dxg:GridColumn Header="Description" FieldName="RtfContent" AllowGrouping="False" Width="400">
+                    <dxg:GridColumn.CellDisplayTemplate>
                         <DataTemplate>
-                            <local:RichTextEdit x:Name="PART_Editor" Height="350" />
-                        </DataTemplate>
-                    </dxg:GridColumn.CellTemplate>
-                    <dxg:GridColumn.DisplayTemplate>
-                        <ControlTemplate>
-                            <local:RichTextBoxEx BorderThickness="0" RtfText="{Binding DisplayText, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                            <local:RichTextBoxEx BorderThickness="0" RtfText="{Binding Path=Value, Mode=OneWay}"
                                                  HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" />
-                        </ControlTemplate>
-                    </dxg:GridColumn.DisplayTemplate>
-                    <dxg:GridColumn.EditTemplate>
-                        <ControlTemplate>
-                            <local:RichTextBoxEx BorderThickness="0" x:Name="PART_Editor" 
-                                                 RtfText="{Binding EditValue, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
-                                                 HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Visible" />
-                        </ControlTemplate>
-                    </dxg:GridColumn.EditTemplate>
-                    <dxg:GridColumn.GroupValueTemplate>
-                        <DataTemplate>
-                            <local:RichTextBoxEx BorderThickness="0" RtfText="{Binding Value, Mode=OneWay}" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" />
                         </DataTemplate>
-                    </dxg:GridColumn.GroupValueTemplate>
+                    </dxg:GridColumn.CellDisplayTemplate>
+                    <dxg:GridColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <local:RichTextBoxEx BorderThickness="0" RtfText="{Binding Path=Value, Mode=TwoWay}"
+                                                 HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Visible" />
+                        </DataTemplate>
+                    </dxg:GridColumn.CellEditTemplate>
                 </dxg:GridColumn>
             </dxg:GridControl.Columns>
             <dxg:GridControl.View>
-                <dxg:TableView Name="view" />
+                <dxg:TableView Name="view" GetActiveEditorNeedsKey="view_GetActiveEditorNeedsKey" ProcessEditorActivationAction="view_ProcessEditorActivationAction"/>
             </dxg:GridControl.View>
         </dxg:GridControl>
     </dxb:BarManager>

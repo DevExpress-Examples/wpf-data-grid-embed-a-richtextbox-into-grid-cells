@@ -12,15 +12,19 @@ namespace GridApplication {
             dataSet.ReadXml("Cars2.xml");
             grid.ItemsSource = dataSet.Tables[0];
         }
-    }
 
-    public class RichTextEdit : TextEdit {
-        protected override bool NeedsKey(Key key, ModifierKeys modifiers) {
-            if (EditMode == EditMode.InplaceActive && key == Key.Enter && 
-                (modifiers & ModifierKeys.Control) == 0)
-                return true;
+        private void view_GetActiveEditorNeedsKey(object sender, DevExpress.Xpf.Grid.GetActiveEditorNeedsKeyEventArgs e) {
+            if(e.Column.FieldName == "RtfContent") {
+                if(e.Key == Key.Enter && !e.Modifiers.HasFlag(ModifierKeys.Control))
+                    e.NeedsKey = true;
+            }
+        }
 
-            return base.NeedsKey(key, modifiers);
+        private void view_ProcessEditorActivationAction(object sender, DevExpress.Xpf.Grid.ProcessEditorActivationActionEventArgs e) {
+            if(e.Column.FieldName == "RtfContent") {
+                if(e.ActivationAction == ActivationAction.MouseLeftButtonDown)
+                    e.RaiseEventAgain = true;
+            }
         }
     }
 }
