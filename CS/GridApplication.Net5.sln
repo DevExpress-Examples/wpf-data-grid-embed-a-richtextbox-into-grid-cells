@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GridApplication", "GridApplication.csproj", "{95C9F989-C61D-4C2A-81F6-148685C8BBF6}"
+# Visual Studio 16
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GridApplication", "GridApplication.Net5.csproj", "{95C9F989-C61D-4C2A-81F6-148685C8BBF6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
